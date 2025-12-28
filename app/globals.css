@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #09090b;
+    /* Onyx 950 */
+    --foreground: #e4e4e7;
+    /* Marble 200 */
+  }
+
+  /* Minimalist Matte Black - No Texture */
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  /* Ensure smooth gradients look good */
+  @apply antialiased selection:bg-gold/20 selection:text-gold;
+}
