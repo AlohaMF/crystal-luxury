@@ -34,6 +34,32 @@ export default function RootLayout({
             )}>
                 {children}
                 <StickyMobileAction />
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{
+                        __html: JSON.stringify({
+                            "@context": "https://schema.org",
+                            "@type": "Organization",
+                            "name": "Crystal Clean Collective",
+                            "url": "https://www.crystalcleancollective.com",
+                            "logo": "https://www.crystalcleancollective.com/logo.png",
+                            "description": "Ultra-luxury cleaning services for discerning clients.",
+                            "address": {
+                                "@type": "PostalAddress",
+                                "streetAddress": "123 Luxury Lane",
+                                "addressLocality": "Beverly Hills",
+                                "addressRegion": "CA",
+                                "postalCode": "90210",
+                                "addressCountry": "US"
+                            },
+                            "contactPoint": {
+                                "@type": "ContactPoint",
+                                "telephone": "+1-800-555-LUXE",
+                                "contactType": "customer service"
+                            }
+                        })
+                    }}
+                />
             </body>
         </html>
     );

@@ -6,7 +6,7 @@ import { Logo } from "@/components/ui/Logo";
 
 export function Hero() {
     return (
-        <div className="relative h-screen w-full overflow-hidden bg-onyx-950 flex flex-col items-center justify-center">
+        <header role="banner" className="relative h-screen w-full overflow-hidden bg-onyx-950 flex flex-col items-center justify-center">
             {/* Video Background with Heavy Matte Overlay */}
             <div className="absolute inset-0 z-0">
                 <video
@@ -14,6 +14,7 @@ export function Hero() {
                     muted
                     loop
                     playsInline
+                    poster="/hero-poster.jpg"
                     className="h-full w-full object-cover opacity-80 mix-blend-normal"
                 >
                     {/* Placeholder: Luxury Living Room. 
@@ -84,6 +85,6 @@ export function Hero() {
                 transition={{ delay: 1.2, duration: 1 }}
                 className="absolute bottom-0 left-1/2 -translate-x-1/2 w-px bg-gradient-to-t from-gold/50 to-transparent"
             />
-        </div>
+        </header>
     );
 }

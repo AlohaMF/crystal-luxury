@@ -44,7 +44,7 @@ export function FeaturesGrid() {
 
                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
                     {features.map((feature, index) => (
-                        <motion.div
+                        <motion.article
                             key={index}
                             initial={{ opacity: 0, y: 20 }}
                             whileInView={{ opacity: 1, y: 0 }}
@@ -64,7 +64,7 @@ export function FeaturesGrid() {
                                     {feature.description}
                                 </p>
                             </div>
-                        </motion.div>
+                        </motion.article>
                     ))}
                 </div>
             </div>
