@@ -1,0 +1,69 @@
+{
+    "teams": [
+        {
+            "id": "t1",
+            "name": "Alpha Team",
+            "color": "bg-gold",
+            "skills": [
+                "Deep",
+                "Move-In"
+            ]
+        },
+        {
+            "id": "t2",
+            "name": "Gold Team",
+            "color": "bg-blue-400",
+            "skills": [
+                "Standard",
+                "Valet"
+            ]
+        },
+        {
+            "id": "t3",
+            "name": "Onyx Team",
+            "color": "bg-emerald-400",
+            "skills": [
+                "Standard",
+                "Deep"
+            ]
+        }
+    ],
+    "bookings": [
+        {
+            "id": "b1",
+            "client": "The resonant Estate",
+            "location": "Davis Island",
+            "startHour": 8,
+            "duration": 4,
+            "type": "Deep",
+            "status": "confirmed",
+            "date": "2025-01-10",
+            "teamId": "t1",
+            "price": "$450.00"
+        },
+        {
+            "id": "b2",
+            "client": "Penthouse 4B",
+            "location": "Bayshore",
+            "startHour": 13,
+            "duration": 3,
+            "type": "Standard",
+            "status": "confirmed",
+            "date": "2025-01-10",
+            "teamId": "t1",
+            "price": "$350.00"
+        },
+        {
+            "id": "b3",
+            "client": "Modern Villa",
+            "location": "Snell Isle",
+            "startHour": 9,
+            "duration": 5,
+            "type": "Deep",
+            "status": "confirmed",
+            "date": "2025-01-10",
+            "teamId": "t2",
+            "price": "$550.00"
+        }
+    ]
+}

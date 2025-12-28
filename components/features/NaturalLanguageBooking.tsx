@@ -293,18 +293,24 @@ export function NaturalLanguageBooking() {
                                             };
 
                                             try {
-                                                const res = await fetch('/api/booking/create', {
+                                                const res = await fetch('/api/bookings', {
                                                     method: 'POST',
-                                                    body: JSON.stringify(payload),
+                                                    body: JSON.stringify({
+                                                        ...payload,
+                                                        startHour: 9, // Default logic for now
+                                                        duration: 3,
+                                                        type: payload.service.includes("Deep") ? "Deep" : "Standard",
+                                                        teamId: "t1" // Auto-assign to Alpha for MVP
+                                                    }),
                                                     headers: { 'Content-Type': 'application/json' }
                                                 });
                                                 const data = await res.json();
 
                                                 if (data.success) {
-                                                    alert("Booking Confirmed! Check console for SMS/Email logs.");
+                                                    alert("Booking Confirmed! Check the Fleet View in Admin.");
                                                     window.location.reload(); // Reset for demo
                                                 } else {
-                                                    alert("Error: " + data.error);
+                                                    alert("Error: " + (data.error || "Unknown"));
                                                 }
                                             } catch (e) {
                                                 alert("Network Error");

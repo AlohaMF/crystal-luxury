@@ -1,65 +1,52 @@
 "use client";
 
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { motion } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { Clock, MapPin, User, AlertCircle } from "lucide-react";
-
-// Types
-type Booking = {
-    id: string;
-    client: string;
-    location: string;
-    startHour: number; // 0-24
-    duration: number; // in hours
-    type: "Standard" | "Deep" | "Move-In";
-    status: "confirmed" | "pending" | "travel";
-    notes?: string;
-};
-
-type Team = {
-    id: string;
-    name: string;
-    color: string;
-    bookings: Booking[];
-};
-
-// Mock Data
-const TEAMS: Team[] = [
-    {
-        id: "t1",
-        name: "Alpha Team",
-        color: "bg-gold",
-        bookings: [
-            { id: "b1", client: "The resonant Estate", location: "Davis Island", startHour: 8, duration: 4, type: "Deep", status: "confirmed" },
-            { id: "b2", client: "Travel", location: "", startHour: 12, duration: 1, type: "Standard", status: "travel" },
-            { id: "b3", client: "Penthouse 4B", location: "Bayshore", startHour: 13, duration: 3, type: "Standard", status: "confirmed" },
-        ]
-    },
-    {
-        id: "t2",
-        name: "Gold Team",
-        color: "bg-blue-400",
-        bookings: [
-            { id: "b4", client: "Modern Villa", location: "Snell Isle", startHour: 9, duration: 5, type: "Deep", status: "confirmed" },
-        ]
-    },
-    {
-        id: "t3",
-        name: "Onyx Team",
-        color: "bg-emerald-400",
-        bookings: [
-            { id: "b5", client: "Loft 22", location: "Channelside", startHour: 8, duration: 2.5, type: "Standard", status: "confirmed" },
-            { id: "b6", client: "Gap Alert", location: "", startHour: 10.5, duration: 1.5, type: "Standard", status: "pending", notes: "Optimization opportunity" },
-            { id: "b7", client: "Historic Bungalow", location: "Hyde Park", startHour: 12, duration: 4, type: "Move-In", status: "confirmed" },
-        ]
-    },
-];
+import { Team, Booking } from "@/types";
 
 const HOURS = Array.from({ length: 13 }, (_, i) => i + 7); // 7 AM to 7 PM
 
+type TeamWithBookings = Team & { bookings: Booking[] };
+
 export function FleetGantt() {
     const [selectedBooking, setSelectedBooking] = useState<string | null>(null);
+    const [teams, setTeams] = useState<TeamWithBookings[]>([]);
+    const [loading, setLoading] = useState(true);
+
+    useEffect(() => {
+        async function fetchData() {
+            try {
+                // Fetch Teams
+                const teamsRes = await fetch('/api/teams');
+                const teamsData: Team[] = await teamsRes.json();
+
+                // Fetch Bookings
+                const bookingsRes = await fetch('/api/bookings');
+                const bookingsData: Booking[] = await bookingsRes.json();
+
+                // Merge Data
+                const mergedData = teamsData.map(team => ({
+                    ...team,
+                    bookings: bookingsData.filter(b => b.teamId === team.id)
+                }));
+
+                setTeams(mergedData);
+            } catch (error) {
+                console.error("Failed to fetch fleet data", error);
+            } finally {
+                setLoading(false);
+            }
+        }
+
+        fetchData();
+    }, []);
+
+    if (loading) {
+        return <div className="p-8 text-center text-marble-200/50">Details loading...</div>;
+    }
 
     return (
         <div className="flex flex-col h-full bg-onyx-950 text-marble overflow-x-auto">
@@ -79,7 +66,7 @@ export function FleetGantt() {
 
             {/* Teams Rows */}
             <div className="divide-y divide-white/5 min-w-[1000px]">
-                {TEAMS.map((team) => (
+                {teams.map((team) => (
                     <div key={team.id} className="flex group hover:bg-white/5 transition-colors">
                         {/* Team Name Column */}
                         <div className="w-48 p-4 border-r border-gold/10 shrink-0 flex items-center justify-between">
