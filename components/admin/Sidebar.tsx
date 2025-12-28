@@ -46,9 +46,9 @@ export function Sidebar() {
             <motion.aside
                 initial={false}
                 animate={{ x: isOpen ? 0 : "-100%" }}
-                // Reset transform on desktop (md)
+                // Reset transform on desktop (md) using !important to override framer-motion inline styles
                 className={cn(
-                    "fixed inset-y-0 left-0 z-40 w-64 bg-onyx-950 border-r border-gold/10 flex flex-col transition-transform duration-300 md:translate-x-0",
+                    "fixed inset-y-0 left-0 z-40 w-64 bg-onyx-950 border-r border-gold/10 flex flex-col transition-transform duration-300 md:!translate-x-0",
                     isOpen ? "translate-x-0" : "-translate-x-full"
                 )}
             >

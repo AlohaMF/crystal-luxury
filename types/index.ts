@@ -1,6 +1,19 @@
 export type ServiceType = "Standard" | "Deep" | "Move-In" | "Valet";
 export type BookingStatus = "confirmed" | "pending" | "travel" | "completed";
 
+export type AssetStatus = "Active" | "Maintenance" | "Retired" | "Cleaning";
+export type AssetType = "Vehicle" | "Equipment" | "Uniform";
+
+export interface Asset {
+    id: string;
+    name: string;
+    type: AssetType;
+    status: AssetStatus;
+    assignedTo: string;
+    health: number; // 0-100
+}
+
+
 export interface Booking {
     id: string;
     client: string;

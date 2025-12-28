@@ -65,5 +65,47 @@
             "teamId": "t2",
             "price": "$550.00"
         }
+    ],
+    "assets": [
+        {
+            "id": "V-01",
+            "name": "Mercedes Sprinter (Black)",
+            "type": "Vehicle",
+            "status": "Active",
+            "assignedTo": "Alpha Team",
+            "health": 92
+        },
+        {
+            "id": "E-04",
+            "name": "Industrial Steam Cleaner",
+            "type": "Equipment",
+            "status": "Maintenance",
+            "assignedTo": "Depot",
+            "health": 45
+        },
+        {
+            "id": "V-02",
+            "name": "Mercedes Sprinter (Black)",
+            "type": "Vehicle",
+            "status": "Active",
+            "assignedTo": "Gold Team",
+            "health": 88
+        },
+        {
+            "id": "E-09",
+            "name": "HEPA Vacuum Pro",
+            "type": "Equipment",
+            "status": "Active",
+            "assignedTo": "Alpha Team",
+            "health": 76
+        },
+        {
+            "id": "U-12",
+            "name": "Uniform Set (Premium)",
+            "type": "Uniform",
+            "status": "Cleaning",
+            "assignedTo": "Laundry",
+            "health": 100
+        }
     ]
 }

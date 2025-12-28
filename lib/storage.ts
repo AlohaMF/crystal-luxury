@@ -1,12 +1,13 @@
 import fs from 'fs/promises';
 import path from 'path';
-import { Booking, Team } from '@/types';
+import { Booking, Team, Asset } from '@/types';
 
 const DB_PATH = path.join(process.cwd(), 'data', 'db.json');
 
 interface DB {
     teams: Team[];
     bookings: Booking[];
+    assets: Asset[];
 }
 
 async function readDB(): Promise<DB> {
@@ -15,7 +16,7 @@ async function readDB(): Promise<DB> {
         return JSON.parse(data);
     } catch (error) {
         // If file doesn't exist, return empty structure or default
-        return { teams: [], bookings: [] };
+        return { teams: [], bookings: [], assets: [] };
     }
 }
 
@@ -38,4 +39,17 @@ export async function createBooking(booking: Booking): Promise<Booking> {
     db.bookings.push(booking);
     await writeDB(db);
     return booking;
+}
+
+export async function getAssets(): Promise<Asset[]> {
+    const db = await readDB();
+    return db.assets || [];
+}
+
+export async function createAsset(asset: Asset): Promise<Asset> {
+    const db = await readDB();
+    if (!db.assets) db.assets = [];
+    db.assets.push(asset);
+    await writeDB(db);
+    return asset;
 }
